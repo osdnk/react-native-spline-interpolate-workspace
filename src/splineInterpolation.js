@@ -41,6 +41,7 @@ export function creteInterpolationSplines(inputValues, outputValues) {
   for (let i = 0; i < inputValues.length; i++) {
     interpolationNodes.push({ x: inputValues[i], y: outputValues[i] });
   }
+  interpolationNodes.sort((a, b) => a.x - b.x)
 
   const n = inputValues.length - 1;
   const deltas = [];
@@ -79,7 +80,7 @@ export function creteInterpolationSplines(inputValues, outputValues) {
     }
   }
 
-  const r = [0].concat(gaussElimination(A, thetas)).concat([0]);
+  const r = [0, ...gaussElimination(A, thetas), 0];
   const as = [];
   const bs = [];
   const cs = [];
@@ -98,14 +99,39 @@ export function creteInterpolationSplines(inputValues, outputValues) {
       as[i] +
       bs[i] * (interpolationNodes[i + 1].x - interpolationNodes[i].x) +
       cs[i] *
-        (interpolationNodes[i + 1].x - interpolationNodes[i].x) *
-        (interpolationNodes[i + 1].x - interpolationNodes[i].x) /
-        2 +
+      (interpolationNodes[i + 1].x - interpolationNodes[i].x) *
+      (interpolationNodes[i + 1].x - interpolationNodes[i].x) /
+      2 +
       ds[i] *
-        (interpolationNodes[i + 1].x - interpolationNodes[i].x) *
-        (interpolationNodes[i + 1].x - interpolationNodes[i].x) *
-        (interpolationNodes[i + 1].x - interpolationNodes[i].x) /
-        6;
+      (interpolationNodes[i + 1].x - interpolationNodes[i].x) *
+      (interpolationNodes[i + 1].x - interpolationNodes[i].x) *
+      (interpolationNodes[i + 1].x - interpolationNodes[i].x) /
+      6;
   }
   return { as, bs, cs, ds };
+}
+
+export function __makeChart(input, out, scale = 1, amount = 100) {
+  const {
+    as,
+    bs,
+    cs,
+    ds
+  } = creteInterpolationSplines(input, out);
+  input.sort((a, b) => a-b);
+  const res = [];
+  for (let i = 0; i< amount; i++) {
+    const current = ((input[input.length - 1] - input[0]) * i ) / (amount - 1) + input[0];
+    let p = 0;
+    while (current >  input[p + 1]) {
+      p++
+    }
+    const c = current - input[p];
+    res.push({x: scale * current, y: scale * (as[p] + bs[p] * c + cs[p] * c * c / 2 + ds[p] * c * c * c / 6), isNode: false})
+  }
+  for (let i = 0; i < input.length; i++) {
+    res.push({x: input[i] * scale, y: out[i] * scale, isNode: true})
+  }
+  return res;
+
 }
