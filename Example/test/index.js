@@ -58,6 +58,23 @@ function runTiming() {
 const INPUT = [0, 20, 70, 100];
 const OUTPUT = [0, 40, 50, 100];
 export default class Example extends Component {
+  static navigationOptions = ({ navigation }) => {
+    const params = navigation.state.params || { startAnimation: ()=>{} };
+    return {
+      headerRight: (
+        <Button onPress={params.startAnimation} title="Start" />
+      ),
+    };
+  };
+  constructor(props) {
+    super(props);
+    this.props.navigation.setParams({ startAnimation: () => {
+      this._transX = runTiming();
+      this.setState({ running: !this.state.running });
+    }} );
+  }
+
+
   _transX = runTiming();
   state = {
     running: false
@@ -73,10 +90,10 @@ export default class Example extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.chart}>
-          {[...Array(100).keys()].map(c =>
+          {[...Array(101).keys()].map(c =>
             <View key={c * scale} style={[styles.chartdot, {
-              top: c * scale + DOT_SIZE / 2 + CHART_DOT_SIZE / 2,
-              left: c * scale + DOT_SIZE / 2 + CHART_DOT_SIZE / 2
+              top: c * scale + DOT_SIZE / 2 + CHART_DOT_SIZE / 2 + 1,
+              left: c * scale + DOT_SIZE / 2 + CHART_DOT_SIZE / 2 + 1
             }]}/>
           )}
           <Animated.View
@@ -87,8 +104,8 @@ export default class Example extends Component {
         <View style={styles.chart}>
           {this.__charts.map(c =>
             <View key={`${c.isNode ? "n" : "t"} ${c.x}`} style={[styles.chartdot, {
-              top: c.y + DOT_SIZE / 2 + CHART_DOT_SIZE / 2,
-              left: c.x + DOT_SIZE / 2 + CHART_DOT_SIZE / 2,
+              top: c.y + DOT_SIZE / 2 + CHART_DOT_SIZE / 2 + 1,
+              left: c.x + DOT_SIZE / 2 + CHART_DOT_SIZE / 2 + 1,
               backgroundColor: c.isNode ? 'red' : '#06060610'
             }]}/>
           )}
@@ -97,10 +114,6 @@ export default class Example extends Component {
               { translateY: this.state.running ? y2 : 0 }] }]}
           />
         </View>
-        <Button title='Press me!' onPress={() => {
-          this._transX = runTiming();
-          this.setState({ running: !this.state.running });
-        }}/>
       </View>
     );
   }
@@ -114,7 +127,7 @@ const styles = StyleSheet.create({
     padding: 5,
     borderWidth: 2,
     borderColor: '#06060688',
-    margin: 4
+    margin: 2
   },
   chartdot: {
     position: 'absolute',
