@@ -110,3 +110,28 @@ export function creteInterpolationSplines(inputValues, outputValues) {
   }
   return { as, bs, cs, ds };
 }
+
+export function __makeChart(input, out, scale = 1, amount = 100) {
+  const {
+    as,
+    bs,
+    cs,
+    ds
+  } = creteInterpolationSplines(input, out);
+  input.sort((a, b) => a-b);
+  const res = [];
+  for (let i = 0; i< amount; i++) {
+    const current = ((input[input.length - 1] - input[0]) * i ) / (amount - 1) + input[0];
+    let p = 0;
+    while (current >  input[p + 1]) {
+      p++
+    }
+    const c = current - input[p];
+    res.push({x: scale * current, y: scale * (as[p] + bs[p] * c + cs[p] * c * c / 2 + ds[p] * c * c * c / 6), isNode: false})
+  }
+  for (let i = 0; i < input.length; i++) {
+    res.push({x: input[i] * scale, y: out[i] * scale, isNode: true})
+  }
+  return res;
+
+}
