@@ -41,6 +41,7 @@ export function creteInterpolationSplines(inputValues, outputValues) {
   for (let i = 0; i < inputValues.length; i++) {
     interpolationNodes.push({ x: inputValues[i], y: outputValues[i] });
   }
+  interpolationNodes.sort((a, b) => a.x - b.x)
 
   const n = inputValues.length - 1;
   const deltas = [];
@@ -79,7 +80,7 @@ export function creteInterpolationSplines(inputValues, outputValues) {
     }
   }
 
-  const r = [0].concat(gaussElimination(A, thetas)).concat([0]);
+  const r = [0, ...gaussElimination(A, thetas), 0];
   const as = [];
   const bs = [];
   const cs = [];
