@@ -14,8 +14,8 @@ YellowBox.ignoreWarnings([
 // https://github.com/react-navigation/react-navigation/issues/3956
 
 const SCREENS = {
-  Animated: { screen: RE, title: "Animated Example" },
-  Reanimated: { screen: AE, title: "Reanimated Example" }
+  Animated: { screen: RE, title: "Reanimated Example" },
+  Reanimated: { screen: AE, title: "Aanimated Example" }
 };
 
 class MainScreen extends React.Component {
