@@ -3,7 +3,8 @@ import { Text, View, FlatList, StyleSheet, YellowBox } from "react-native";
 import { createStackNavigator } from "react-navigation";
 import { RectButton, ScrollView } from "react-native-gesture-handler";
 
-import Test from "./test";
+import RE from "./reanimatedExample";
+import AE from "./animatedExample";
 
 YellowBox.ignoreWarnings([
   "Warning: isMounted(...) is deprecated",
@@ -13,10 +14,8 @@ YellowBox.ignoreWarnings([
 // https://github.com/react-navigation/react-navigation/issues/3956
 
 const SCREENS = {
-  Animated: { screen: Test, title: "Animated Example" },
-  Reanimated: { screen: Test, title: "Reanimated Example" },
-  AnimatedSandbox: { screen: Test, title: "Animated Sandbox" },
-  ReanimatedSandbox: { screen: Test, title: "Reanimated Sandbox" }
+  Animated: { screen: RE, title: "Animated Example" },
+  Reanimated: { screen: AE, title: "Reanimated Example" }
 };
 
 class MainScreen extends React.Component {
