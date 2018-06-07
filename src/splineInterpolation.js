@@ -86,8 +86,7 @@ export function __makeChart(input, out, scale = 1, amount = 100) {
     const c = current - input[p];
     res.push({
       x: scale * current,
-      y:
-        scale * (as[p] + bs[p] * c + cs[p] * c * c / 2 + ds[p] * c * c * c / 6),
+      y: scale * (as[p] + bs[p] * c + cs[p] * c * c / 2 + ds[p] * c * c * c / 6),
       isNode: false
     });
   }

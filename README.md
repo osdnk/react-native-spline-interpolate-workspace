@@ -2,7 +2,7 @@
 <img src="Gifs/reanimated.gif" width="200" />&nbsp;&nbsp;&nbsp;&nbsp;
 <img src="Gifs/animated.gif" width="200" />
 ## Purpose
-Provide API for declarative native spline order interpolation in React Native a linear complexity
+Provide API for declarative native spline third order interpolation in React Native in a linear complexity
 
 ## General
 Code consists of three separated file which are supposed to be separated libraries in future.
@@ -14,10 +14,10 @@ Firstly, it was made using Gaussian elimination and then optimized for O(n) comp
 It was applied to RN in two ways: using native core drivers 
 and [`react-native-reanimated`](https://github.com/kmagiera/react-native-reanimated) library.
 
-Decided to use this library as it allow for 'lazy' nodes evaluation. 
+Decided to use this library as it allows for 'lazy' nodes evaluation. 
 Particularly it means that nodes prepared for evaluating every range 
-are evaluating each range using native drivers and then... multiplied by zero.
-`Reanimated` gives us condition nodes which does  not evaluate it's input if not needed.
+are evaluating each frame using native drivers and then... multiplied by zero or one :tada:.
+`Reanimated` gives us condition nodes which does not evaluate its input if not needed.
 
 It will be deeply explained in some paper in the future
 
@@ -54,7 +54,7 @@ export default class Example extends Component {
 
 ```
 
-### Reanimated
+### `Reanimated`
 ```javascript
 import React, { Component } from "react";
 import { View } from "react-native";
