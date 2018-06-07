@@ -37,7 +37,8 @@ export default class Example extends Component {
   _transX = new Value(0);
   _anim = timing(this._transX, {
     toValue: 100,
-    duration: 5000
+    duration: 5000,
+    useNativeDriver: true
   });
 
   __charts = __makeChart(inputRange, outputRange, scale);

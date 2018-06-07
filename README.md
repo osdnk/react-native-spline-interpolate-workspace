@@ -5,10 +5,10 @@
 Provide API for declarative native spline third order interpolation in React Native in a linear complexity
 
 ## General
-Code consists of three separated file which are supposed to be separated libraries in future.
+Code consists of three separated files which are supposed to be separated libraries in future.
 
 - `splineInterpolation.js` 
-gives math foundation for further calculation.
+gives math foundation for further calculations.
 Firstly, it was made using Gaussian elimination and then optimized for O(n) complexity where n is a number of interpolation nodes.
 
 It was applied to RN in two ways: using native core drivers 
@@ -38,7 +38,8 @@ export default class Example extends Component {
   _transX = new Value(0);
   _anim = timing(this._transX, {
     toValue: 100,
-    duration: 5000
+    duration: 5000,
+    useNativeDriver: true
   }).start();
   render() {
     const interpolated = splineInterpolate(this._transX, { inputRange, outputRange });
