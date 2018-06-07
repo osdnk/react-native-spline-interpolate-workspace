@@ -12,8 +12,8 @@ const CHART_DOT_SIZE = 4;
 const ax = Math.min(width, height / 2 - 50) - DOT_SIZE;
 const scale = (ax - DOT_SIZE) / 100;
 
-const INPUT = [0, 20, 70, 100];
-const OUTPUT = [0, 40, 50, 100];
+const INPUT = [0, 20, 45, 70, 85, 100];
+const OUTPUT = [100, 70, 60, 30, 35, 0];
 export default class Example extends Component {
   static navigationOptions = ({ navigation }) => {
     const params = navigation.state.params || {
