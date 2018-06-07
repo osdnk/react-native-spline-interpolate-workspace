@@ -46,8 +46,8 @@ function runTiming() {
   ]);
 }
 
-const INPUT = [0, 20, 70, 100];
-const OUTPUT = [0, 40, 50, 100];
+const inputRange = [0, 20, 70, 100];
+const outputRange = [0, 40, 50, 100];
 export default class Example extends Component {
   static navigationOptions = ({ navigation }) => {
     const params = navigation.state.params || {
@@ -61,7 +61,7 @@ export default class Example extends Component {
   state = {
     running: false
   };
-  __charts = __makeChart(INPUT, OUTPUT, scale);
+  __charts = __makeChart(inputRange, outputRange, scale);
 
   constructor(props) {
     super(props);
@@ -76,7 +76,7 @@ export default class Example extends Component {
   render() {
     const x = multiply(this._transX, scale);
     const y1 = x;
-    const interpolated = splineInterpolate(this._transX, INPUT, OUTPUT);
+    const interpolated = splineInterpolate(this._transX, { inputRange, outputRange });
     const y2 = multiply(interpolated, scale);
     return (
       <View style={styles.container}>

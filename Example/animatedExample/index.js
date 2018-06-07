@@ -12,8 +12,9 @@ const CHART_DOT_SIZE = 4;
 const ax = Math.min(width, height / 2 - 50) - DOT_SIZE;
 const scale = (ax - DOT_SIZE) / 100;
 
-const INPUT = [0, 20, 45, 70, 85, 100];
-const OUTPUT = [100, 70, 60, 30, 35, 0];
+const inputRange = [0, 20, 45, 70, 85, 100];
+const outputRange = [100, 70, 60, 30, 35, 0];
+
 export default class Example extends Component {
   static navigationOptions = ({ navigation }) => {
     const params = navigation.state.params || {
@@ -39,12 +40,12 @@ export default class Example extends Component {
     duration: 5000
   });
 
-  __charts = __makeChart(INPUT, OUTPUT, scale);
+  __charts = __makeChart(inputRange, outputRange, scale);
 
   render() {
     const x = multiply(this._transX, scale);
     const y1 = x;
-    const interpolated = splineInterpolate(this._transX, INPUT, OUTPUT);
+    const interpolated = splineInterpolate(this._transX, { inputRange, outputRange });
     const y2 = multiply(interpolated, scale);
     return (
       <View style={styles.container}>

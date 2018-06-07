@@ -3,7 +3,8 @@ import { creteInterpolationSplines } from "./splineInterpolation";
 
 const { cond, add, multiply, lessThan, lessOrEq, sub, pow } = Animated;
 
-function splineInterpolate(V, X, Y) {
+function splineInterpolate(V, config) {
+  const { inputRange: X, outputRange: Y } = config;
   const { as, bs, cs, ds } = creteInterpolationSplines(X, Y);
   const n = X.length - 1;
   let h = sub(V, X[n - 1]);

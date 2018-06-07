@@ -1,6 +1,8 @@
 import { Animated } from "../Example/node_modules/react-native";
 import { creteInterpolationSplines } from "./splineInterpolation";
 
+const EPS = 0.000001;
+
 function add(...args) {
   let c = args[args.length - 1];
   for (let i = args.length - 2; i >= 0; i--) {
@@ -32,13 +34,14 @@ function pow(a, n) {
 function ranger(v, a, b) {
   return function(x, y) {
     return v.interpolate({
-      inputRange: [a, x, x, y, y, b],
+      inputRange: [a - EPS, x - EPS, x, y, y, b],
       outputRange: [0, 0, 1, 1, 0, 0]
     });
   };
 }
 
-function splineInterpolate(V, X, Y) {
+function splineInterpolate(V, config) {
+  const { inputRange: X, outputRange: Y } = config;
   const { as, bs, cs, ds } = creteInterpolationSplines(X, Y);
   const r = ranger(V, X[0], X[X.length - 1]);
 
