@@ -1,3 +1,3 @@
 ## react-native-spline-interpolate
-![reanimated](Gifs/reanimated.gif)
-![animated](Gifs/animated.gif)
+<img src="Gifs/reanimated.gif" width="200" />&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="Gifs/animated.gif" width="200" />
