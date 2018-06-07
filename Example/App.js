@@ -15,7 +15,7 @@ YellowBox.ignoreWarnings([
 
 const SCREENS = {
   Animated: { screen: RE, title: "Reanimated Example" },
-  Reanimated: { screen: AE, title: "Aanimated Example" }
+  Reanimated: { screen: AE, title: "Animated Example" }
 };
 
 class MainScreen extends React.Component {
