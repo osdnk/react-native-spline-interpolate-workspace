@@ -1,4 +1,4 @@
-import Animated from "../Example/node_modules/react-native-reanimated";
+import Animated from "react-native-reanimated";
 import { creteInterpolationSplines } from "./splineInterpolation";
 
 const { cond, add, multiply, lessThan, lessOrEq, sub, pow } = Animated;

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Button, Dimensions, StyleSheet, View } from "react-native";
-import { splineInterpolate } from "../../src/reanimatedSplineInterpolation";
+import { splineInterpolate } from "../src/reanimatedSplineInterpolation";
 import Animated, { Easing } from "react-native-reanimated";
 
-import { __makeChart } from "../../src/splineInterpolation";
+import { __makeChart } from "../src/splineInterpolation";
 
 const {
   cond,
@@ -39,8 +39,11 @@ function runTiming() {
   };
 
   return block([
-    cond(clockRunning(clock), 0, [startClock(clock)]),
-    timing(clock, state, config),
+    cond(clockRunning(clock),
+      timing(clock, state, config)
+      , [
+      startClock(clock)]
+    ),
     cond(state.finished, debug("stop clock", stopClock(clock))),
     state.position
   ]);

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Dimensions, Button, Animated } from "react-native";
-import { splineInterpolate } from "../../src/animatedSplineInterpolation";
+import { splineInterpolate } from "../src/animatedSplineInterpolation";
 
 const { multiply, Value, timing } = Animated;
 
-import { __makeChart } from "../../src/splineInterpolation";
+import { __makeChart } from "../src/splineInterpolation";
 
 const { width, height } = Dimensions.get("window");
 const DOT_SIZE = 20;

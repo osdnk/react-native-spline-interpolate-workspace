@@ -1,4 +1,4 @@
-import { Animated } from "../Example/node_modules/react-native";
+import { Animated } from "react-native";
 import { creteInterpolationSplines } from "./splineInterpolation";
 
 const EPS = 0.000001;
