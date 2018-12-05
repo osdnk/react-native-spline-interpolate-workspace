@@ -8,9 +8,9 @@
   },
   "dependencies": {
     "@babel/runtime": "7.0.0-beta.55",
-    "react": "16.6.0",
-    "react-native": "0.57.4",
-    "react-native-gesture-handler": "^1.0.8",
+    "react": "16.6.3",
+    "react-native": "0.57.7",
+    "react-native-gesture-handler": "^1.0.10",
     "react-native-reanimated": "^1.0.0-alpha.10",
     "react-navigation": "^2.0.4"
   },

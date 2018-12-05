@@ -5,6 +5,7 @@ import { RectButton, ScrollView } from "react-native-gesture-handler";
 
 import RE from "./reanimatedExample";
 import AE from "./animatedExample";
+import AU from "./reanimatedUse";
 
 YellowBox.ignoreWarnings([
   "Warning: isMounted(...) is deprecated",
@@ -15,7 +16,8 @@ YellowBox.ignoreWarnings([
 
 const SCREENS = {
   Animated: { screen: RE, title: "Reanimated Example" },
-  Reanimated: { screen: AE, title: "Animated Example" }
+  Reanimated: { screen: AE, title: "Animated Example" },
+  ReanimatedUse: { screen: AU, title: "Reanimated usage" }
 };
 
 class MainScreen extends React.Component {
