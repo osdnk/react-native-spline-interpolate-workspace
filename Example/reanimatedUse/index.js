@@ -41,18 +41,40 @@ const lagrangeInterpolate = (val, { inputRange, outputRange }) => {
   return add(...nodes);
 }
 
+const multiplyJS = (...args) => {
+  return args.reduce( (a,b) => a * b )
+}
+
+const addJS = (...args) => {
+  return args.reduce( (a,b) => a + b )
+}
+const lagrangeInterpolateJS = (val, { inputRange, outputRange }) => {
+  const nodes = [];
+  for (let i = 0; i < inputRange.length; i++) {
+    const factors = [];
+    for (let j = 0; j < inputRange.length; j++) {
+      if (i === j) {
+        continue;
+      }
+      factors.push((val - inputRange[j])/(inputRange[i] - inputRange[j]))
+    }
+    nodes.push(multiplyJS(...factors, outputRange[i]))
+  }
+  return addJS(...nodes);
+}
 
 
-const strategy = splineInterpolate;
+
+
+
+const strategy = lagrangeInterpolate;
 
 // Basic example
-/*
-const POINTS = [
+/*const POINTS = [
   [0, 10],
   [100, 60],
   [200, 110],
-]
-*/
+]*/
 
 /*const POINTS = [
   [0, 10],
@@ -61,23 +83,45 @@ const POINTS = [
   [200, 110],
 ]*/
 
-const POINTS = [
+/*const POINTS = [
   [0, 10],
   [20, 10],
   [40, 60],
   [50, 40],
   [70, 40],
   [100, 110],
-  [130, 10],
+  [130, 40],
   [200, 80],
+]*/
+
+const POINTS = [
+  [0, 10],
+  [40, 10],
+  [50, 10],
+  [60, 10],
+  [70, 10],
+  [100, 20],
+  [200, 10],
 ]
 
-/*const POINTS = [
-  [0, 10],
-  [40, 60],
-  [50, 50],
-  [200, 110],
-]*/
+const prepareLinearChart = (inputRange, outputRange, scale, amount = 100) => {
+  for (let i = 0; i < amount; i++) {
+    const current =
+      (inputRange[inputRange.length - 1] - inputRange[0]) * i / (amount - 1) + inputRange[0];
+
+  }
+}
+
+const __makeChartLag = (inputRange, outputRange, scale, amount = 100) => {
+  const resu = []
+  for (let i = 0; i < amount; i++) {
+    const current =
+      (inputRange[inputRange.length - 1] - inputRange[0]) * i / (amount - 1) + inputRange[0];
+    const res = lagrangeInterpolateJS(current, { inputRange, outputRange });
+    resu.push({ x: current * scale, y: res * scale })
+  }
+  return resu;
+}
 
 
 
@@ -147,6 +191,10 @@ export default class Example extends Component {
     });
   }
 
+  __chart = __makeChart(inputRange, outputRange, scale, 1000);
+
+  __charts =__makeChartLag(inputRange, outputRange, scale, 1000)
+
   render() {
     const points = (() => {
       const res = [];
@@ -172,6 +220,18 @@ export default class Example extends Component {
                 top: scale * c.y,
                 left: scale * c.x,
                 backgroundColor: "red"
+              }
+            ]}
+          />
+        ))}
+        {this.state.running || this.__charts.map(c => (
+          <View
+            key={`${c.isNode ? "n" : "t"} ${c.x}`}
+            style={[
+              styles.chartdot,
+              {
+                top: c.x ,
+                left: c.y,
               }
             ]}
           />
@@ -206,7 +266,7 @@ const styles = StyleSheet.create({
     borderRadius: CHART_DOT_SIZE / 2,
     width: CHART_DOT_SIZE,
     height: CHART_DOT_SIZE,
-    backgroundColor: "#06060633"
+    backgroundColor: "grey"
   },
   container: {
     flex: 1,

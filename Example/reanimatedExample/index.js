@@ -13,6 +13,7 @@ const {
   clockRunning,
   block,
   timing,
+  greaterThan,
   debug,
   Value,
   Clock

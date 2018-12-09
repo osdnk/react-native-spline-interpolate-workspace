@@ -63,6 +63,8 @@ const ExampleApp = createStackNavigator(
     ...SCREENS
   },
   {
+    //initialRouteName: "ReanimatedUse"
+    // TODO UNCOMMENT ME
     initialRouteName: "Main"
   }
 );

@@ -8,15 +8,12 @@ function splineInterpolate(V, config) {
   const { as, bs, cs, ds } = creteInterpolationSplines(X, Y);
   const n = X.length - 1;
   let h = sub(V, X[n - 1]);
-  let t = cond(
-    lessOrEq(V, X[n]),
+  let t =
     add(
       as[n - 1],
       multiply(bs[n - 1], h),
       multiply(cs[n - 1], pow(h, 2), 0.5),
       multiply(ds[n - 1], pow(h, 3), 1 / 6)
-    ),
-    0
   );
   for (let i = n - 1; i >= 1; i--) {
     h = sub(V, X[i - 1]);
